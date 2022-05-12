@@ -11,10 +11,12 @@ import SuccessfulOrderPage from "../SuccessfulOrderPage";
 import SettingsPage from "../SettingsPage";
 
 import "../../assets/css/reset.css";
+import GlobalStyle from "../../assets/globalStyle";
 
 function App() {
     return (
         <BrowserRouter>
+            <GlobalStyle />
             <Routes>
                 <Route path="/sign-in" element={<LoginPage/>}/>
                 <Route path="/sign-up" element={<SignUpPage/>}/>
