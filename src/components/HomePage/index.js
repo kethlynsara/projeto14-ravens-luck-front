@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
+import Header from '../Header';
 import TabBar from '../TabBar';
 import BookElement from './BookElement';
 
@@ -22,6 +23,8 @@ function HomePage() {
 
     return (
         <Container>
+            <Header />
+
             <List>
                 <h2>Newest</h2>
 
@@ -30,7 +33,7 @@ function HomePage() {
                 </ul>
             </List>
 
-            <TabBar />
+            <TabBar className="user-icon" />
         </Container>
     )
 }
