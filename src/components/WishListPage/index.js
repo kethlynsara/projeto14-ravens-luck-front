@@ -1,5 +1,7 @@
+import TabBar from '../TabBar';
+
 function WishListPage() {
-    return <h1>Wishlist</h1>
+    return <TabBar icon={'bookmark'}/>
 }
 
 export default WishListPage;
