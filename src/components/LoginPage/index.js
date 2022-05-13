@@ -19,14 +19,13 @@ function LoginPage() {
     async function login(e) {
         e.preventDefault();
         try {
-            const { data } = await axios.post('https://projeto14-ravens-luck-back.herokuapp.com/sign-in', {email: inputs.email, password: inputs.password});
+            const { data } = await axios.post('http://localhost:5000/sign-in', {email: inputs.email, password: inputs.password});
             setUserInfo({...userInfo, name: data.name, image: data.image, token: data.token})
             navigate("/");
         }catch(e) {
-            console.log(e.response.data)
+            alert(e.response.data);
         }
     }
-
     return (
         <Container>
             <H1>Raven's Luck</H1>

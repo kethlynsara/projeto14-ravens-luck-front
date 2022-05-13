@@ -21,7 +21,7 @@ function SignUpPage() {
     async function signUp(e) {
         e.preventDefault();
         try {
-            const {data} = await axios.post('https://projeto14-ravens-luck-back.herokuapp.com/sign-up', {
+            const {data} = await axios.post('http://localhost:5000/sign-up', {
                 username: inputs.username,
                 email: inputs.email,
                 image: inputs.image,
@@ -31,7 +31,7 @@ function SignUpPage() {
             console.log(data);
             navigate("/sign-in");
         }catch(e) {
-            console.log(e.response.data);
+            alert(e.response.data);
         }
     }
 
@@ -59,7 +59,7 @@ function SignUpPage() {
                 <StyledLink to='/sign-in'>Já tem uma conta? Entre agora!</StyledLink>
             </form>
         </Container>
-        )
+    )
 }
 
 export default SignUpPage;
