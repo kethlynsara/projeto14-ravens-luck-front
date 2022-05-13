@@ -12,12 +12,14 @@ import ConfirmOrderPage from '../ConfirmOrderPage';
 import SuccessfulOrderPage from '../SuccessfulOrderPage';
 import SettingsPage from '../SettingsPage';
 
-import '../../assets/css/reset.css';
+import "../../assets/css/reset.css";
+import GlobalStyle from "../../assets/globalStyle";
 
 function App() {
     const [userInfo, setUserInfo] = useState({name: '', image: '', token: ''});
     return (
         <UserContext.Provider value={{ userInfo, setUserInfo }}>
+            <GlobalStyle />
             <BrowserRouter>
                 <Routes>
                     <Route path='/sign-in' element={<LoginPage />} />
