@@ -18,6 +18,11 @@ const GlobalStyle = createGlobalStyle`
         margin-top: 6px;
         stroke-width: 0.6;
     }
+
+    .user-icon {
+        color: var(--main-color);
+        margin-right: 12px;
+    }
 `;
 
 export default GlobalStyle;
