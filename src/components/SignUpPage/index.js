@@ -2,11 +2,10 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
-import H1 from '../styledComponents/Logo';
-import Input from '../styledComponents/Inputs';
-import {Button, StyledLink} from '../styledComponents/Button';
-import Container from '../styledComponents/Container';
+import H1 from '../../assets/styledComponents/Logo';
+import Input from '../../assets/styledComponents/Inputs';
+import {Button, StyledLink} from '../../assets/styledComponents/Button';
+import Container from '../../assets/styledComponents/Container';
 
 function SignUpPage() {
     const navigate = useNavigate();
@@ -21,7 +20,7 @@ function SignUpPage() {
     async function signUp(e) {
         e.preventDefault();
         try {
-            const {data} = await axios.post('http://localhost:5000/sign-up', {
+            const {data} = await axios.post('https://projeto14-ravens-luck-back.herokuapp.com/sign-up', {
                 username: inputs.username,
                 email: inputs.email,
                 image: inputs.image,

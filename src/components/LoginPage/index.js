@@ -3,10 +3,10 @@ import { useState, useContext  } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import UserContext from "../../contexts/UserContext";
-import H1 from '../styledComponents/Logo';
-import Input from '../styledComponents/Inputs';
-import {Button, StyledLink} from '../styledComponents/Button';
-import Container from '../styledComponents/Container';
+import H1 from '../../assets/styledComponents/Logo';
+import Input from '../../assets/styledComponents/Inputs';
+import {Button, StyledLink} from '../../assets/styledComponents/Button';
+import Container from '../../assets/styledComponents/Container';
 
 function LoginPage() {
     const { userInfo, setUserInfo } = useContext(UserContext); 
@@ -19,7 +19,7 @@ function LoginPage() {
     async function login(e) {
         e.preventDefault();
         try {
-            const { data } = await axios.post('http://localhost:5000/sign-in', {email: inputs.email, password: inputs.password});
+            const { data } = await axios.post('https://projeto14-ravens-luck-back.herokuapp.com/sign-in', {email: inputs.email, password: inputs.password});
             setUserInfo({...userInfo, name: data.name, image: data.image, token: data.token})
             navigate("/");
         }catch(e) {

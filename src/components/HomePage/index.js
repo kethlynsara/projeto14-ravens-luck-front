@@ -1,5 +1,7 @@
+import TabBar from '../TabBar';
+
 function HomePage() {
-    return <h1>Home</h1>
+    return  <h1>Home</h1>     
 }
 
 export default HomePage;
