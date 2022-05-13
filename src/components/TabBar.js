@@ -6,8 +6,8 @@ function TabBar({icon}) {
     return (
             <Footer>
                 <Icons>
-                    <StyledLink to="/"><RiHomeLine style={icon === 'home' ? {color: '#000'} : {color: '#9C9EA8;'}} /></StyledLink>
-                    <StyledLink to="wishlist"><RiBookmarkLine style={icon === 'bookmark' ? {color: '#000'} : {color: '#9C9EA8;'}} /></StyledLink>
+                    <StyledLink to="/"><RiHomeLine style={icon === 'home' ? {color: "#000"} : {color: "#9C9EA8"}} /></StyledLink>
+                    <StyledLink to="wishlist"><RiBookmarkLine style={icon === 'bookmark' ? {color: "#000"} : {color: "#9C9EA8"}} /></StyledLink>
                     <StyledLink to="/cart"><RiShoppingCart2Line /></StyledLink>
                     <StyledLink to="/settings"><RiSettings4Line /></StyledLink>
                 </Icons>

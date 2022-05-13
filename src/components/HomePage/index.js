@@ -29,6 +29,8 @@ function HomePage() {
                     {books.map((elem, i) => <BookElement key={i} elem={elem} />)}
                 </ul>
             </List>
+
+            <TabBar />
         </Container>
     )
 }
