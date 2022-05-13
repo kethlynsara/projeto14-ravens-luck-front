@@ -20,7 +20,7 @@ function SignUpPage() {
     async function signUp(e) {
         e.preventDefault();
         try {
-            const {data} = await axios.post('https://projeto14-ravens-luck-back.herokuapp.com/sign-up', {
+            const {data} = await axios.post('http://localhost:5000/sign-up', {
                 username: inputs.username,
                 email: inputs.email,
                 image: inputs.image,
@@ -38,7 +38,7 @@ function SignUpPage() {
         <Container>
             <H1>Raven's Luck</H1>
             <form>
-                <Input type='text' placeholder='Nome' value={inputs.name} required
+                <Input type='text' placeholder='Nome' value={inputs.username} required
                        onChange={(e) => setInputs({...inputs, username: e.target.value})}></Input>
 
                 <Input type='email' placeholder='E-mail' value={inputs.email} required
