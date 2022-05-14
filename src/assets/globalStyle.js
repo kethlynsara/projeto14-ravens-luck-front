@@ -23,6 +23,14 @@ const GlobalStyle = createGlobalStyle`
         color: var(--main-color);
         margin-right: 12px;
     }
+
+    .nav-active {
+        color: var(--main-color);
+    }
+    .nav-inactive {
+        color: var(--main-color);
+        opacity: 0.7;
+    }
 `;
 
 export default GlobalStyle;
