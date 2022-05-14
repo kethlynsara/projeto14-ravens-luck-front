@@ -13,7 +13,7 @@ function CartPage() {
 
     async function getData() {
         try {
-            const { data } = await axios.get('http://localhost:5000/user/cart', config);
+            const { data } = await axios.get('https://projeto14-ravens-luck-back.herokuapp.com/user/cart', config);
             console.log(data);
         } catch(err) {
             console.log(err);

@@ -16,7 +16,7 @@ function BookPage() {
     useEffect(() => {
         async function getData() {
             try {
-                const { data } = await axios.get('http://localhost:5000/books/' + bookId);
+                const { data } = await axios.get('https://projeto14-ravens-luck-back.herokuapp.com/books/' + bookId);
                 setBook(data);
             } catch(err) {
                 console.log(err.response.data);
@@ -33,7 +33,7 @@ function BookPage() {
         }
 
         try {
-            await axios.post('http://localhost:5000/user/cart', book, config);
+            await axios.post('https://projeto14-ravens-luck-back.herokuapp.com/user/cart', book, config);
             navigate('/user/cart');
         } catch(err) {
             console.log(err.response.data);
