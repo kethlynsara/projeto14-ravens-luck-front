@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 
     :root {
         --main-color: #06070D;
+        --button-color: #06070D;
     }
 
     .bookmark-icon {

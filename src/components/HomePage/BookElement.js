@@ -1,18 +1,19 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { BsBookmark } from 'react-icons/bs';
 
 export default function BookElement({ elem }) {
-    const { title, author, image } = elem;
+    const { title, author, image, _id } = elem;
 
     return (
         <Box>
-            <div>
+            <DisplayLink to={"/books/" + _id}>
                 <Cover src={image} />
                 <span>
                     <Title>{title}</Title>
                     <Author>{author}</Author>
                 </span>
-            </div>
+            </DisplayLink>
             <BsBookmark className="bookmark-icon" />
         </Box>
     )
@@ -23,10 +24,11 @@ const Box = styled.li`
     display: flex;
     justify-content: space-between;
     margin-bottom: 24px;
+`;
 
-    div {
-        display: flex;
-    }
+const DisplayLink = styled(Link)`
+    display: flex;
+    text-decoration: none;
 `;
 
 const Cover = styled.img`
