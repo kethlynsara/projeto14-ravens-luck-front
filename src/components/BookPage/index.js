@@ -1,13 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { MdArrowBackIos } from 'react-icons/md';
 import { BsBookmark, BsThreeDotsVertical } from 'react-icons/bs';
 
+import UserContext from '../../contexts/UserContext';
+
 function BookPage() {
     const [book, setBook] = useState();
     const { bookId } = useParams();
+    const navigate = useNavigate();
+    const { userInfo } = useContext(UserContext);
 
     useEffect(() => {
         async function getData() {
@@ -20,6 +24,21 @@ function BookPage() {
         }
         getData();
     }, [bookId]);
+
+    async function addBookToCart() {
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${userInfo.token}`
+            }
+        }
+
+        try {
+            await axios.post('http://localhost:5000/user/cart', book, config);
+            navigate('/user/cart');
+        } catch(err) {
+            console.log(err.response.data);
+        }
+    }
 
     return (
         <Container>
@@ -40,7 +59,10 @@ function BookPage() {
                     <Description>{book.description}</Description>
                 </Book>
 
-                <BuyButton>
+                <BuyButton onClick={() => {
+                        if (userInfo.token === '') navigate('/sign-in');
+                            else addBookToCart();
+                    }}>
                     <p>Compre agora por R${book.price}</p>
                 </BuyButton>
             </>
