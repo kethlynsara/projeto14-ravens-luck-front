@@ -12,7 +12,7 @@ function HomePage() {
     useEffect(() => {
         async function getData() {
             try {
-                const response = await axios.get('https://projeto14-ravens-luck-back.herokuapp.com/');
+                const response = await axios.get(process.env.REACT_APP_HEROKU_URL);
                 setBooks(response.data);
             } catch(err) {
                 console.log(err.response.data);

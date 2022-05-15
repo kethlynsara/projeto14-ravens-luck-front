@@ -22,7 +22,7 @@ function TabBar({icon}) {
                     </NavLink>
 
                     <NavLink className={({ isActive }) => isActive ? "nav-active" : "nav-inactive"}
-                    to={userInfo.token === '' ? '/sign-in' : '/cart'}>
+                    to={userInfo.token === '' ? '/sign-in' : '/user/cart'}>
                         <RiShoppingCart2Line />
                     </NavLink>
 
