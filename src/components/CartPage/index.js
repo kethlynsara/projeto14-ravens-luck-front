@@ -2,11 +2,11 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { MdArrowBackIos } from 'react-icons/md';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 
 import UserContext from '../../contexts/UserContext';
 import CartElement from './CartElement';
+import Arrow from '../Arrow';
 
 function CartPage() {
     const { userInfo } = useContext(UserContext);
@@ -35,7 +35,7 @@ function CartPage() {
     return (
         <Container>
             <Icons>
-                <MdArrowBackIos size="24px" onClick={() => navigate(-1)}/>
+                <Arrow />
                 <BsThreeDotsVertical size="24px"/>
             </Icons>
 

@@ -7,7 +7,7 @@ import Arrow from '../Arrow';
 function SuccessfulOrderPage() {
     return (
         <Container>
-            <Link to='/delivery' ><Arrow /></Link>
+            <Arrow />
             <FaRegCheckCircle className="check-icon" />
             <h6>Compra realizada com sucesso!</h6>
             <p>O pedido será entregue em até 30 dias. </p>

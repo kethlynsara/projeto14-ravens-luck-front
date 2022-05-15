@@ -1,10 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { IoIosArrowBack } from 'react-icons/io';
+import { MdArrowBackIos } from 'react-icons/md';
 
 function Arrow(){
+    const navigate = useNavigate();
+
     return (
         <Header>
-            <IoIosArrowBack />
+            <MdArrowBackIos onClick={() => navigate(-1)} size="24px"/>
         </Header>
     )
 }

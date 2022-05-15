@@ -12,7 +12,6 @@ import Arrow from '../Arrow';
 
 function ConfirmOrderPage() {
     const { userInfo } = useContext(UserContext);
-    console.log(userInfo.token)
     const config = {
         headers: {
             'Authorization': `Bearer ${userInfo.token}`
@@ -94,7 +93,7 @@ function ConfirmOrderPage() {
 
     return (
             <Container>
-                <Link to='/cart'><Arrow /></Link>
+                <Arrow />
                 <H1>Confirme seus dados</H1>
                 <form>
                     <Input type='text' placeholder='Nome' value={inputs.nome} required
