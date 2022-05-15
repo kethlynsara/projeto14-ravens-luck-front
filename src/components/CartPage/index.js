@@ -19,16 +19,17 @@ function CartPage() {
     const [cart, setCart] = useState(null);
     const [total, setTotal] = useState(0);
 
-    useEffect(() => {
-        async function getData() {
-            try {
-                const { data } = await axios.get(process.env.REACT_APP_HEROKU_URL + '/user/cart', config);
-                setCart(data.cart);
-                setTotal(data.total.replace('.', ','));
-            } catch(err) {
-                console.log(err);
-            }
+    async function getData() {
+        try {
+            const { data } = await axios.get(process.env.REACT_APP_HEROKU_URL + '/user/cart', config);
+            setCart(data.cart);
+            setTotal(data.total.replace('.', ','));
+        } catch(err) {
+            console.log(err);
         }
+    }
+
+    useEffect(() => {
         getData();
     }, []);
 
@@ -40,7 +41,7 @@ function CartPage() {
             </Icons>
 
             <ul>
-                {cart ? cart.map((elem, i) => <CartElement key={i} elem={elem} />) : <p>Sem livros no carrinho...</p>}
+                {cart ? cart.map((elem, i) => <CartElement key={i} elem={elem} getData={getData} />) : <p>Sem livros no carrinho...</p>}
             </ul>
 
             <Box>
