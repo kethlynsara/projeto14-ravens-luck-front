@@ -35,7 +35,7 @@ function CartPage() {
     return (
         <Container>
             <Icons>
-                <MdArrowBackIos size="24px"/>
+                <MdArrowBackIos size="24px" onClick={() => navigate(-1)}/>
                 <BsThreeDotsVertical size="24px"/>
             </Icons>
 
