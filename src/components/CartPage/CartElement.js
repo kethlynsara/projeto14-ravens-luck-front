@@ -1,7 +1,33 @@
+import { useContext } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
+import { MdRemoveShoppingCart } from 'react-icons/md';
 
-export default function CartElement({ elem }) {
+import UserContext from '../../contexts/UserContext';
+
+export default function CartElement({ elem, getData }) {
     const { image, title, author, price } = elem;
+    const { userInfo } = useContext(UserContext);
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${userInfo.token}`
+        }
+    };
+
+    async function removeBookFromCart() {
+        try {
+            const response = await axios.delete(process.env.REACT_APP_HEROKU_URL + '/user/cart', {
+                headers: {
+                    'Authorization': `Bearer ${userInfo.token}`
+                },
+                data :{
+                    book: elem
+                }});
+            getData();
+        } catch(err) {
+            console.log(err);
+        }
+    }
 
     return (
         <Box>
@@ -11,6 +37,10 @@ export default function CartElement({ elem }) {
                 <Author>{author}</Author>
                 <Value>R${price}</Value>
             </div>
+
+            <RemoveIcon>
+                <MdRemoveShoppingCart size="24px" onClick={removeBookFromCart}/>
+            </RemoveIcon>
         </Box>
     );
 }
@@ -23,6 +53,7 @@ const Box = styled.li`
     background-color: #F8F8F8;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
+    position: relative;
 `;
 
 const Cover = styled.img`
@@ -55,4 +86,11 @@ const Value = styled.p`
     font-weight: 500;
     line-height: 30px;
     color: #000;
+`;
+
+const RemoveIcon = styled.div`
+    position: absolute;
+    right: 18px;
+    bottom: 24px;
+    cursor: pointer;
 `;

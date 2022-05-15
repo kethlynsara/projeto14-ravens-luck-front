@@ -2,11 +2,11 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { MdArrowBackIos } from 'react-icons/md';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 
 import UserContext from '../../contexts/UserContext';
 import CartElement from './CartElement';
+import Arrow from '../Arrow';
 
 function CartPage() {
     const { userInfo } = useContext(UserContext);
@@ -19,28 +19,29 @@ function CartPage() {
     const [cart, setCart] = useState(null);
     const [total, setTotal] = useState(0);
 
-    useEffect(() => {
-        async function getData() {
-            try {
-                const { data } = await axios.get(process.env.REACT_APP_HEROKU_URL + '/user/cart', config);
-                setCart(data.cart);
-                setTotal(data.total.replace('.', ','));
-            } catch(err) {
-                console.log(err);
-            }
+    async function getData() {
+        try {
+            const { data } = await axios.get(process.env.REACT_APP_HEROKU_URL + '/user/cart', config);
+            setCart(data.cart);
+            setTotal(data.total.replace('.', ','));
+        } catch(err) {
+            console.log(err);
         }
+    }
+
+    useEffect(() => {
         getData();
     }, []);
 
     return (
         <Container>
             <Icons>
-                <MdArrowBackIos size="24px" onClick={() => navigate(-1)}/>
+                <Arrow />
                 <BsThreeDotsVertical size="24px"/>
             </Icons>
 
             <ul>
-                {cart ? cart.map((elem, i) => <CartElement key={i} elem={elem} />) : <p>Sem livros no carrinho...</p>}
+                {cart ? cart.map((elem, i) => <CartElement key={i} elem={elem} getData={getData} />) : <p>Sem livros no carrinho...</p>}
             </ul>
 
             <Box>
