@@ -38,7 +38,7 @@ function SignUpPage() {
         <Container>
             <H1>Raven's Luck</H1>
             <form>
-                <Input type='text' placeholder='Nome' value={inputs.name} required
+                <Input type='text' placeholder='Nome' value={inputs.username} required
                        onChange={(e) => setInputs({...inputs, username: e.target.value})}></Input>
 
                 <Input type='email' placeholder='E-mail' value={inputs.email} required
