@@ -1,11 +1,12 @@
-//import UserContext from "../../contexts/UserContext";
 import axios from 'axios';
 import { useState } from 'react';
+import styled from 'styled-components';
+import { FaRegCheckCircle } from 'react-icons/fa';
 
-import H1 from '../../assets/styledComponents/Logo';
 import Input from '../../assets/styledComponents/Inputs';
 import { Button } from '../../assets/styledComponents/Button';
 import Container from '../../assets/styledComponents/Container';
+import Arrow from '../Arrow';
 
 function ConfirmOrderPage() {
     const [inputs, setInputs] = useState({
@@ -19,9 +20,10 @@ function ConfirmOrderPage() {
         cidade: '',
         uf: ''
     });
+    const [on, setOn] = useState(false);
 
     function clearForm() {
-        setInputs({
+        setInputs({...inputs,
             rua: '',
             bairro: '',
             cidade: '',
@@ -36,15 +38,16 @@ function ConfirmOrderPage() {
             if (validateCEP.test(cep)) {
                 try {
                     const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-                    setInputs({
+                    setInputs({...inputs,
                         rua: data.logradouro,
                         bairro: data.bairro,
                         cidade: data.localidade,
                         uf: data.uf
-                    })
+                    });
                     if (data.erro) {
                         alert("CPF inválido!");
                     }
+                    console.log(data)
                 }catch(e) {
                     alert(e.response.data);
                 }
@@ -65,7 +68,8 @@ function ConfirmOrderPage() {
 
     return (
             <Container>
-                <H1>Raven's Luck</H1>
+                <Arrow />
+                <H1>Confirme seus dados</H1>
                 <form>
                     <Input type='text' placeholder='Nome' value={inputs.nome} required
                            onChange={(e) => setInputs({...inputs, nome: e.target.value})}></Input>
@@ -95,6 +99,11 @@ function ConfirmOrderPage() {
                     <Input type='text' placeholder='UF' value={inputs.uf} required
                            onChange={(e) => setInputs({...inputs, uf: e.target.value})}></Input>
 
+                    <Frete color={on ? '#368511' : '#06070D'} onClick={() => setOn(!on)}>
+                        <FaRegCheckCircle />
+                        <p>Frete grátis</p>
+                    </Frete>
+
                     <Button type='button' onClick={confirmOrder}>Finalizar Pedido</Button>
                </form>
     </Container>
@@ -102,3 +111,37 @@ function ConfirmOrderPage() {
 }
 
 export default ConfirmOrderPage;
+
+const H1 = styled.h1`
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+    margin-bottom: 48px;
+`;
+
+const Frete = styled.div`
+    width: 154px;
+    height: 40px;
+    font-style: normal;
+    color: #06070D;
+    margin: 40px 0 47px 0;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 32px rgba(7, 8, 14, 0.05);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        color: ${props => props.color};
+    }
+
+    p {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        margin-left: 5px;
+    }
+`;
