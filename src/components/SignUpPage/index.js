@@ -20,7 +20,7 @@ function SignUpPage() {
     async function signUp(e) {
         e.preventDefault();
         try {
-            const {data} = await axios.post('https://projeto14-ravens-luck-back.herokuapp.com/sign-up', {
+            const {data} = await axios.post(process.env.REACT_APP_HEROKU_URL + '/sign-up', {
                 username: inputs.username,
                 email: inputs.email,
                 image: inputs.image,

@@ -12,22 +12,24 @@ import ConfirmOrderPage from '../ConfirmOrderPage';
 import SuccessfulOrderPage from '../SuccessfulOrderPage';
 import SettingsPage from '../SettingsPage';
 
-import '../../assets/css/reset.css';
+import "../../assets/css/reset.css";
+import GlobalStyle from "../../assets/globalStyle";
 
 function App() {
     const [userInfo, setUserInfo] = useState({name: '', image: '', token: ''});
     return (
         <UserContext.Provider value={{ userInfo, setUserInfo }}>
+            <GlobalStyle />
             <BrowserRouter>
                 <Routes>
                     <Route path='/sign-in' element={<LoginPage />} />
                     <Route path='/sign-up' element={<SignUpPage />} />
                     <Route path='/' element={<HomePage />} />
-                    <Route path='/books/:bookid' element={<BookPage />} />
-                    <Route path='/cart' element={<CartPage />} />
+                    <Route path='/books/:bookId' element={<BookPage />} />
+                    <Route path='/user/cart' element={<CartPage />} />
                     <Route path='/wishlist' element={<WishListPage />} />
                     <Route path='/settings' element={<SettingsPage />} />
-                    <Route path='/delivery' element={<ConfirmOrderPage />} />
+                    <Route path='/user/delivery' element={<ConfirmOrderPage />} />
                     <Route path='/success' element={<SuccessfulOrderPage />} />
                 </Routes>
             </BrowserRouter>
