@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
@@ -9,6 +10,7 @@ import Container from '../../assets/styledComponents/Container';
 import Arrow from '../Arrow';
 
 function ConfirmOrderPage() {
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         nome: '',
         email: '',
@@ -64,11 +66,12 @@ function ConfirmOrderPage() {
     function confirmOrder(e) {
         e.preventDefault();
         console.log(inputs.nome, inputs.email, inputs.telefone, inputs.cep, inputs.rua, inputs.num, inputs.bairro, inputs.cidade, inputs.uf)
+        navigate('/success');
     }
 
     return (
             <Container>
-                <Arrow />
+                <Link to='/cart'><Arrow /></Link>
                 <H1>Confirme seus dados</H1>
                 <form>
                     <Input type='text' placeholder='Nome' value={inputs.nome} required
