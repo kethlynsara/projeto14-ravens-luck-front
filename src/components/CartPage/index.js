@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { MdArrowBackIos } from 'react-icons/md';
@@ -14,7 +15,7 @@ function CartPage() {
             'Authorization': `Bearer ${userInfo.token}`
         }
     };
-
+    const navigate = useNavigate();
     const [cart, setCart] = useState(null);
     const [total, setTotal] = useState(0);
 
@@ -47,7 +48,7 @@ function CartPage() {
                     <span>Total</span>
                     R${total}
                 </Total>
-                <Button>
+                <Button onClick={() => navigate('/user/delivery')}>
                     <p>CHECK-OUT</p>
                 </Button>
             </Box>
@@ -117,6 +118,11 @@ const Button = styled.button`
     background-color: var(--button-color);
     position: absolute;
     right: -30px;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.1);
+    }
 
     p {
         font-family: 'Roboto', sans-serif;

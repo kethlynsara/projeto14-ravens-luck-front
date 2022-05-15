@@ -29,7 +29,7 @@ function App() {
                     <Route path='/user/cart' element={<CartPage />} />
                     <Route path='/wishlist' element={<WishListPage />} />
                     <Route path='/settings' element={<SettingsPage />} />
-                    <Route path='/delivery' element={<ConfirmOrderPage />} />
+                    <Route path='/user/delivery' element={<ConfirmOrderPage />} />
                     <Route path='/success' element={<SuccessfulOrderPage />} />
                 </Routes>
             </BrowserRouter>
