@@ -1,15 +1,23 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
+import UserContext from '../../contexts/UserContext';
 import Input from '../../assets/styledComponents/Inputs';
 import { Button } from '../../assets/styledComponents/Button';
 import Container from '../../assets/styledComponents/Container';
 import Arrow from '../Arrow';
 
 function ConfirmOrderPage() {
+    const { userInfo } = useContext(UserContext);
+    console.log(userInfo.token)
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${userInfo.token}`
+        }
+    };
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         nome: '',
@@ -22,7 +30,6 @@ function ConfirmOrderPage() {
         cidade: '',
         uf: ''
     });
-    const [on, setOn] = useState(false);
 
     function clearForm() {
         setInputs({...inputs,
@@ -63,10 +70,26 @@ function ConfirmOrderPage() {
         }
     }
 
-    function confirmOrder(e) {
+    async function confirmOrder(e) {
         e.preventDefault();
-        console.log(inputs.nome, inputs.email, inputs.telefone, inputs.cep, inputs.rua, inputs.num, inputs.bairro, inputs.cidade, inputs.uf)
-        navigate('/success');
+        try {
+            axios.post('https://projeto14-ravens-luck-back.herokuapp.com/delivery', {
+                name: inputs.nome,
+                email: inputs.email,
+                phone: inputs.telefone,
+                address: {
+                    cep: inputs.cep,
+                    rua: inputs.rua,
+                    num: inputs.num,
+                    bairro: inputs.bairro,
+                    cidade: inputs.cidade,
+                    uf: inputs.uf
+                }
+            }, config);
+            navigate('/success');
+        }catch(e) {
+            console.log(e);
+        }
     }
 
     return (
@@ -102,7 +125,7 @@ function ConfirmOrderPage() {
                     <Input type='text' placeholder='UF' value={inputs.uf} required
                            onChange={(e) => setInputs({...inputs, uf: e.target.value})}></Input>
 
-                    <Frete color={on ? '#368511' : '#06070D'} onClick={() => setOn(!on)}>
+                    <Frete>
                         <FaRegCheckCircle />
                         <p>Frete grátis</p>
                     </Frete>

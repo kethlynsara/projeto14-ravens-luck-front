@@ -1,23 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaRegCheckCircle } from 'react-icons/fa';
 
 import Arrow from '../Arrow';
 
 function SuccessfulOrderPage() {
-    const navigate = useNavigate();
-    function goBackToHome() {
-        //zerar carrinho de compras
-        navigate('/');
-    }
-
     return (
         <Container>
             <Link to='/delivery' ><Arrow /></Link>
             <FaRegCheckCircle className="check-icon" />
             <h6>Compra realizada com sucesso!</h6>
             <p>O pedido será entregue em até 30 dias. </p>
-            <button onClick={goBackToHome}>Voltar</button>
+            <Link to='/'><button>Voltar</button></Link>
         </Container>
     )
 }
