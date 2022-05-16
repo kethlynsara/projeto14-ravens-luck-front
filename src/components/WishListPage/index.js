@@ -1,7 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 
+import Arrow from '../Arrow';
 import TabBar from '../TabBar';
 import BookElement from '../HomePage/BookElement';
 import UserContext from '../../contexts/UserContext';
@@ -28,6 +30,10 @@ function WishListPage() {
 
     return (
         <Container>
+            <Header>
+                <Arrow />
+                <BsThreeDotsVertical size="24px" style={{marginLeft: "24px"}}/>
+            </Header>
             <List>
                 <ul>
                     {books.map((elem, i) => <BookElement key={i} elem={elem} wishlistPage={wishlistPage} setWishlistPage={setWishlistPage} updateList={updateList} setUpdateList={setUpdateList}/>)}
@@ -56,4 +62,9 @@ const List = styled.div`
     ul {
         width: 100%;
     }
+`;
+
+const Header = styled.header`
+    display: flex;
+    justify-content: space-between;
 `;
