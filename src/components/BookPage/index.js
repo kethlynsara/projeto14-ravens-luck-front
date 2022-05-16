@@ -16,7 +16,7 @@ function BookPage() {
     useEffect(() => {
         async function getData() {
             try {
-                const { data } = await axios.get('process.env.REACT_APP_HEROKU_URL + ' + bookId);
+                const { data } = await axios.get(process.env.REACT_APP_HEROKU_URL + '/books/' + bookId);
                 setBook(data);
             } catch(err) {
                 console.log(err.response.data);
@@ -33,7 +33,7 @@ function BookPage() {
 
     async function addBookToCart() {
         try {
-            await axios.post('process.env.REACT_APP_HEROKU_URL + ', book, config);
+            await axios.post(process.env.REACT_APP_HEROKU_URL + '/user/cart', book, config);
             navigate('/user/cart');
         } catch(err) {
             console.log(err.response.data);
