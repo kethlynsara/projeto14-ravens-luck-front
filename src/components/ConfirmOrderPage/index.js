@@ -72,7 +72,7 @@ function ConfirmOrderPage() {
     async function confirmOrder(e) {
         e.preventDefault();
         try {
-            axios.post('http://localhost:5000/delivery', {
+            axios.post(process.env.REACT_APP_HEROKU_URL + '/delivery', {
                 name: inputs.nome,
                 email: inputs.email,
                 phone: inputs.telefone,
