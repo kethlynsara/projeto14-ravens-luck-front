@@ -8,15 +8,10 @@ import UserContext from '../../contexts/UserContext';
 export default function CartElement({ elem, getData }) {
     const { image, title, author, price } = elem;
     const { userInfo } = useContext(UserContext);
-    // const config = {
-    //     headers: {
-    //         'Authorization': `Bearer ${userInfo.token}`
-    //     }
-    // };
 
     async function removeBookFromCart() {
         try {
-            const response = await axios.delete('http://localhost:7000/user/cart', {
+            const response = await axios.delete('http://localhost:5000/user/cart', {
                 headers: {
                     'Authorization': `Bearer ${userInfo.token}`
                 },

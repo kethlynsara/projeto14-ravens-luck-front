@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { BsBookmark } from 'react-icons/bs';
+import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 
 import UserContext from '../../contexts/UserContext';
 
@@ -14,7 +14,7 @@ export default function BookElement({ elem, homePage, wishlistPage, setUpdateLis
         if (wishlistPage) { 
             console.log('wishlist') 
             try {
-                const { data } = await axios.post('http://localhost:7000/wishlist', { elem }, { headers: {
+                const { data } = await axios.post('http://localhost:5000/wishlist', { elem }, { headers: {
                     'Authorization': `Bearer ${userInfo.token}`
                 }});
                 setUpdateList(updateList + 1);
@@ -25,7 +25,7 @@ export default function BookElement({ elem, homePage, wishlistPage, setUpdateLis
         } else if (homePage) {
             console.log('home')
             try {
-                const { data } = await axios.post('http://localhost:7000/', { elem }, { headers: {
+                const { data } = await axios.post('http://localhost:5000/', { elem }, { headers: {
                     'Authorization': `Bearer ${userInfo.token}`
                 }});
                 console.log(data)
@@ -45,6 +45,7 @@ export default function BookElement({ elem, homePage, wishlistPage, setUpdateLis
                 </span>
             </DisplayLink>
             <BsBookmark className="bookmark-icon" onClick={selectBookmark}/>
+            {/* <BsBookmarkFill /> */}
         </Box>
     )
 }

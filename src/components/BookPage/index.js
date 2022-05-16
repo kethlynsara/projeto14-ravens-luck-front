@@ -16,7 +16,7 @@ function BookPage() {
     useEffect(() => {
         async function getData() {
             try {
-                const { data } = await axios.get('http://localhost:7000/books/' + bookId);
+                const { data } = await axios.get('http://localhost:5000/books/' + bookId);
                 setBook(data);
             } catch(err) {
                 console.log(err.response.data);
@@ -33,7 +33,7 @@ function BookPage() {
 
     async function addBookToCart() {
         try {
-            await axios.post('http://localhost:7000/user/cart', book, config);
+            await axios.post('http://localhost:5000/user/cart', book, config);
             navigate('/user/cart');
         } catch(err) {
             console.log(err.response.data);
@@ -43,7 +43,7 @@ function BookPage() {
     async function selectBookmark() {
         try {
             const elem = book;
-            const { data } = await axios.post('http://localhost:7000/books/' + bookId, elem, config);
+            const { data } = await axios.post('http://localhost:5000/books/' + bookId, elem, config);
             console.log(data)
         }catch(e){
             console.log(e.response.data);

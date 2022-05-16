@@ -17,7 +17,7 @@ function WishListPage() {
     useEffect(() => {
         async function getData() {
             try {
-                const response = await axios.get('http://localhost:7000/wishlist',  { headers: {
+                const response = await axios.get('http://localhost:5000/wishlist',  { headers: {
                     'Authorization': `Bearer ${userInfo.token}`
                 }});
                 setBooks(response.data);
@@ -36,7 +36,7 @@ function WishListPage() {
             </Header>
             <List>
                 <ul>
-                    {books.map((elem, i) => <BookElement key={i} elem={elem} wishlistPage={wishlistPage} setWishlistPage={setWishlistPage} updateList={updateList} setUpdateList={setUpdateList}/>)}
+                    {books.length !== 0 ? books.map((elem, i) => <BookElement key={i} elem={elem} wishlistPage={wishlistPage} setWishlistPage={setWishlistPage} updateList={updateList} setUpdateList={setUpdateList}/>) : <h6>Você não possui nenhum livro salvo ainda!</h6>}
                 </ul>
             </List>
 
@@ -62,9 +62,19 @@ const List = styled.div`
     ul {
         width: 100%;
     }
+
+    h6 {
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 16px;
+        text-align: center;
+        margin-top: 200px;
+        opacity: 0.5;
+    }
 `;
 
 const Header = styled.header`
     display: flex;
     justify-content: space-between;
+    margin-bottom: 35px;
 `;
