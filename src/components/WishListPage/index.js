@@ -17,7 +17,7 @@ function WishListPage() {
     useEffect(() => {
         async function getData() {
             try {
-                const response = await axios.get(process.env.REACT_APP_HEROKU_URL + 'wishlist',  { headers: {
+                const response = await axios.get(process.env.REACT_APP_HEROKU_URL + '/wishlist',  { headers: {
                     'Authorization': `Bearer ${userInfo.token}`
                 }});
                 setBooks(response.data);
@@ -32,11 +32,12 @@ function WishListPage() {
         <Container>
             <Header>
                 <Arrow />
-                <BsThreeDotsVertical size="24px" style={{marginLeft: "24px"}}/>
+                <BsThreeDotsVertical size="24px"/>
             </Header>
             <List>
                 <ul>
-                    {books.length !== 0 ? books.map((elem, i) => <BookElement key={i} elem={elem} wishlistPage={wishlistPage} setWishlistPage={setWishlistPage} updateList={updateList} setUpdateList={setUpdateList}/>) : <h6>Você não possui nenhum livro salvo ainda!</h6>}
+                    {books.length !== 0 ? books.map((elem, i) => <BookElement key={i} elem={elem} wishlistPage={wishlistPage} setWishlistPage={setWishlistPage} updateList={updateList} setUpdateList={setUpdateList}/>)
+                    : <h6>Você não possui nenhum livro salvo ainda!</h6>}
                 </ul>
             </List>
 

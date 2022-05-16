@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 
 import UserContext from '../../contexts/UserContext';
@@ -9,14 +9,16 @@ import UserContext from '../../contexts/UserContext';
 export default function BookElement({ elem, homePage, wishlistPage, setUpdateList, updateList }) {
     const { title, author, image, _id } = elem;
     const { userInfo } = useContext(UserContext);
+    const navigate = useNavigate();
 
     async function selectBookmark() {
         if (wishlistPage) { 
             console.log('wishlist') 
             try {
-                const { data } = await axios.post('http://localhost:5000/wishlist', { elem }, { headers: {
-                    'Authorization': `Bearer ${userInfo.token}`
-                }});
+                const { data } = await axios.post(process.env.REACT_APP_HEROKU_URL + '/wishlist', { elem },
+                    { headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }});
                 setUpdateList(updateList + 1);
                 console.log(data)
             }catch(e){
@@ -25,9 +27,10 @@ export default function BookElement({ elem, homePage, wishlistPage, setUpdateLis
         } else if (homePage) {
             console.log('home')
             try {
-                const { data } = await axios.post(process.env.REACT_APP_HEROKU_URL, { elem }, { headers: {
-                    'Authorization': `Bearer ${userInfo.token}`
-                }});
+                const { data } = await axios.post(process.env.REACT_APP_HEROKU_URL, { elem },
+                    { headers: {
+                        'Authorization': `Bearer ${userInfo.token}`
+                    }});
                 console.log(data)
             }catch(e){
                 console.log(e.response.data);
@@ -44,7 +47,10 @@ export default function BookElement({ elem, homePage, wishlistPage, setUpdateLis
                     <Author>{author}</Author>
                 </span>
             </DisplayLink>
-            <BsBookmark className="bookmark-icon" onClick={selectBookmark}/>
+            <BsBookmark className="bookmark-icon" onClick={() => {
+                if (userInfo.token === '') navigate('/sign-in');
+                    else selectBookmark();
+            }}/>
             {/* <BsBookmarkFill /> */}
         </Box>
     )

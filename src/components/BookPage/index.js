@@ -44,7 +44,7 @@ function BookPage() {
         try {
             const elem = {...book};
             console.log(elem)
-            const { data } = await axios.post('process.env.REACT_APP_HEROKU_URL + ' + bookId, { elem }, config);
+            const { data } = await axios.post(process.env.REACT_APP_HEROKU_URL+ '/books/' + bookId, { elem }, config);
             console.log(data)
         }catch(e){
             console.log(e.response.data);
@@ -57,7 +57,10 @@ function BookPage() {
             <Icons>
                 <MdArrowBackIos size="24px"/>
                 <div>
-                    <BsBookmark size="24px" onClick={selectBookmark}/>
+                    <BsBookmark size="24px" onClick={() => {
+                        if (userInfo.token === '') navigate('/sign-in');
+                            else selectBookmark();
+                    }}/>
                     <BsThreeDotsVertical size="24px" style={{marginLeft: "24px"}}/>
                 </div>
             </Icons>
