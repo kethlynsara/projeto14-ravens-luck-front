@@ -1,9 +1,26 @@
+import axios from 'axios';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { BsBookmark } from 'react-icons/bs';
 
+import UserContext from '../../contexts/UserContext';
+
 export default function BookElement({ elem }) {
     const { title, author, image, _id } = elem;
+    const { userInfo } = useContext(UserContext);
+
+    async function selectBookmark() {
+        try {
+            const { data } = await axios.post('http://localhost:7000/', { elem }, { headers: {
+                'Authorization': `Bearer ${userInfo.token}`
+            }});
+            console.log(data)
+        }catch(e){
+            console.log(e.response.data);
+        }
+
+    }
 
     return (
         <Box>
@@ -14,7 +31,7 @@ export default function BookElement({ elem }) {
                     <Author>{author}</Author>
                 </span>
             </DisplayLink>
-            <BsBookmark className="bookmark-icon" />
+            <BsBookmark className="bookmark-icon" onClick={selectBookmark}/>
         </Box>
     )
 }

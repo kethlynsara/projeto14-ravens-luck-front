@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
@@ -72,7 +72,7 @@ function ConfirmOrderPage() {
     async function confirmOrder(e) {
         e.preventDefault();
         try {
-            axios.post('https://projeto14-ravens-luck-back.herokuapp.com/delivery', {
+            axios.post('http://localhost:7000/delivery', {
                 name: inputs.nome,
                 email: inputs.email,
                 phone: inputs.telefone,

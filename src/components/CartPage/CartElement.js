@@ -8,15 +8,15 @@ import UserContext from '../../contexts/UserContext';
 export default function CartElement({ elem, getData }) {
     const { image, title, author, price } = elem;
     const { userInfo } = useContext(UserContext);
-    const config = {
-        headers: {
-            'Authorization': `Bearer ${userInfo.token}`
-        }
-    };
+    // const config = {
+    //     headers: {
+    //         'Authorization': `Bearer ${userInfo.token}`
+    //     }
+    // };
 
     async function removeBookFromCart() {
         try {
-            const response = await axios.delete(process.env.REACT_APP_HEROKU_URL + '/user/cart', {
+            const response = await axios.delete('http://localhost:7000/user/cart', {
                 headers: {
                     'Authorization': `Bearer ${userInfo.token}`
                 },
@@ -24,6 +24,7 @@ export default function CartElement({ elem, getData }) {
                     book: elem
                 }});
             getData();
+            console.log(response);
         } catch(err) {
             console.log(err);
         }

@@ -16,7 +16,7 @@ function BookPage() {
     useEffect(() => {
         async function getData() {
             try {
-                const { data } = await axios.get(process.env.REACT_APP_HEROKU_URL + '/books/' + bookId);
+                const { data } = await axios.get('http://localhost:7000/books/' + bookId);
                 setBook(data);
             } catch(err) {
                 console.log(err.response.data);
@@ -25,19 +25,29 @@ function BookPage() {
         getData();
     }, [bookId]);
 
-    async function addBookToCart() {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${userInfo.token}`
-            }
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${userInfo.token}`
         }
+    }
 
+    async function addBookToCart() {
         try {
-            await axios.post(process.env.REACT_APP_HEROKU_URL + '/user/cart', book, config);
+            await axios.post('http://localhost:7000/user/cart', book, config);
             navigate('/user/cart');
         } catch(err) {
             console.log(err.response.data);
         }
+    }
+
+    async function selectBookmark() {
+        try {
+            const { data } = await axios.post('http://localhost:7000/books/' + bookId, book, config);
+            console.log(data)
+        }catch(e){
+            console.log(e.response.data);
+        }
+
     }
 
     return (
@@ -45,7 +55,7 @@ function BookPage() {
             <Icons>
                 <MdArrowBackIos size="24px"/>
                 <div>
-                    <BsBookmark size="24px"/>
+                    <BsBookmark size="24px" onClick={selectBookmark}/>
                     <BsThreeDotsVertical size="24px" style={{marginLeft: "24px"}}/>
                 </div>
             </Icons>
