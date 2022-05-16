@@ -9,7 +9,9 @@ import UserContext from '../../contexts/UserContext';
 function WishListPage() {
     const { userInfo } = useContext(UserContext);
     const [books, setBooks] = useState([]);
-    
+    const [wishlistPage, setWishlistPage] = useState(true);
+    const [updateList, setUpdateList] = useState(0);
+
     useEffect(() => {
         async function getData() {
             try {
@@ -22,13 +24,13 @@ function WishListPage() {
             }
         }
         getData();
-    }, []);
+    }, [updateList]);
 
     return (
         <Container>
             <List>
                 <ul>
-                    {books.map((elem, i) => <BookElement key={i} elem={elem}/>)}
+                    {books.map((elem, i) => <BookElement key={i} elem={elem} wishlistPage={wishlistPage} setWishlistPage={setWishlistPage} updateList={updateList} setUpdateList={setUpdateList}/>)}
                 </ul>
             </List>
 

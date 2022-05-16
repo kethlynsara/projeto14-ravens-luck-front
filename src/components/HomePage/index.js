@@ -8,7 +8,8 @@ import BookElement from './BookElement';
 
 function HomePage() {
     const [books, setBooks] = useState([]);
-    
+    const [homePage, setHomePage] = useState(true);
+
     useEffect(() => {
         async function getData() {
             try {
@@ -29,7 +30,7 @@ function HomePage() {
                 <h2>Newest</h2>
 
                 <ul>
-                    {books.map((elem, i) => <BookElement key={i} elem={elem} />)}
+                    {books.map((elem, i) => <BookElement key={i} elem={elem} homePage={homePage} setHomePage={setHomePage}/>)}
                 </ul>
             </List>
 

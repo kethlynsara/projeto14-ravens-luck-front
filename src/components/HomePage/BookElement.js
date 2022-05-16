@@ -6,20 +6,33 @@ import { BsBookmark } from 'react-icons/bs';
 
 import UserContext from '../../contexts/UserContext';
 
-export default function BookElement({ elem, status, setStatus, page }) {
+export default function BookElement({ elem, homePage, wishlistPage, setUpdateList, updateList }) {
     const { title, author, image, _id } = elem;
     const { userInfo } = useContext(UserContext);
 
     async function selectBookmark() {
-        try {
-            const { data } = await axios.post('http://localhost:7000/', { elem }, { headers: {
-                'Authorization': `Bearer ${userInfo.token}`
-            }});
-            console.log(data)
-        }catch(e){
-            console.log(e.response.data);
-        }
-
+        if (wishlistPage) { 
+            console.log('wishlist') 
+            try {
+                const { data } = await axios.post('http://localhost:7000/wishlist', { elem }, { headers: {
+                    'Authorization': `Bearer ${userInfo.token}`
+                }});
+                setUpdateList(updateList + 1);
+                console.log(data)
+            }catch(e){
+                console.log(e.response.data);
+            }
+        } else if (homePage) {
+            console.log('home')
+            try {
+                const { data } = await axios.post('http://localhost:7000/', { elem }, { headers: {
+                    'Authorization': `Bearer ${userInfo.token}`
+                }});
+                console.log(data)
+            }catch(e){
+                console.log(e.response.data);
+            }
+        }   
     }
 
     return (
