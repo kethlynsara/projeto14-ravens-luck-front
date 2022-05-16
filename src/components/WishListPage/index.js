@@ -17,7 +17,7 @@ function WishListPage() {
     useEffect(() => {
         async function getData() {
             try {
-                const response = await axios.get('http://localhost:5000/wishlist',  { headers: {
+                const response = await axios.get(process.env.REACT_APP_HEROKU_URL + 'wishlist',  { headers: {
                     'Authorization': `Bearer ${userInfo.token}`
                 }});
                 setBooks(response.data);
