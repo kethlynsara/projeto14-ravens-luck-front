@@ -25,7 +25,7 @@ export default function BookElement({ elem, homePage, wishlistPage, setUpdateLis
         } else if (homePage) {
             console.log('home')
             try {
-                const { data } = await axios.post('http://localhost:5000/', { elem }, { headers: {
+                const { data } = await axios.post(process.env.REACT_APP_HEROKU_URL, { elem }, { headers: {
                     'Authorization': `Bearer ${userInfo.token}`
                 }});
                 console.log(data)
