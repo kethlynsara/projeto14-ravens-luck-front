@@ -25,13 +25,13 @@ function BookPage() {
         getData();
     }, [bookId]);
 
-    async function addBookToCart() {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${userInfo.token}`
-            }
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${userInfo.token}`
         }
+    }
 
+    async function addBookToCart() {
         try {
             await axios.post(process.env.REACT_APP_HEROKU_URL + '/user/cart', book, config);
             navigate('/user/cart');
@@ -40,12 +40,27 @@ function BookPage() {
         }
     }
 
+    async function selectBookmark() {
+        try {
+            const elem = {...book};
+            console.log(elem)
+            const { data } = await axios.post(process.env.REACT_APP_HEROKU_URL+ '/books/' + bookId, { elem }, config);
+            console.log(data)
+        }catch(e){
+            console.log(e.response.data);
+        }
+
+    }
+
     return (
         <Container>
             <Icons>
                 <MdArrowBackIos size="24px"/>
                 <div>
-                    <BsBookmark size="24px"/>
+                    <BsBookmark size="24px" onClick={() => {
+                        if (userInfo.token === '') navigate('/sign-in');
+                            else selectBookmark();
+                    }}/>
                     <BsThreeDotsVertical size="24px" style={{marginLeft: "24px"}}/>
                 </div>
             </Icons>

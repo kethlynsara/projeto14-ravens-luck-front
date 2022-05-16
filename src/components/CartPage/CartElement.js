@@ -8,11 +8,6 @@ import UserContext from '../../contexts/UserContext';
 export default function CartElement({ elem, getData }) {
     const { image, title, author, price } = elem;
     const { userInfo } = useContext(UserContext);
-    const config = {
-        headers: {
-            'Authorization': `Bearer ${userInfo.token}`
-        }
-    };
 
     async function removeBookFromCart() {
         try {
@@ -24,6 +19,7 @@ export default function CartElement({ elem, getData }) {
                     book: elem
                 }});
             getData();
+            console.log(response);
         } catch(err) {
             console.log(err);
         }
