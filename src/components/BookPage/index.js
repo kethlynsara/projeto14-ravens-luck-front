@@ -42,7 +42,8 @@ function BookPage() {
 
     async function selectBookmark() {
         try {
-            const { data } = await axios.post('http://localhost:7000/books/' + bookId, book, config);
+            const elem = book;
+            const { data } = await axios.post('http://localhost:7000/books/' + bookId, elem, config);
             console.log(data)
         }catch(e){
             console.log(e.response.data);

@@ -6,7 +6,7 @@ import { BsBookmark } from 'react-icons/bs';
 
 import UserContext from '../../contexts/UserContext';
 
-export default function BookElement({ elem }) {
+export default function BookElement({ elem, status, setStatus, page }) {
     const { title, author, image, _id } = elem;
     const { userInfo } = useContext(UserContext);
 
