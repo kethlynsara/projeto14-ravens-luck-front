@@ -11,7 +11,7 @@ export default function CartElement({ elem, getData }) {
 
     async function removeBookFromCart() {
         try {
-            const response = await axios.delete('http://localhost:5000/user/cart', {
+            const response = await axios.delete(process.env.REACT_APP_HEROKU_URL + '/user/cart', {
                 headers: {
                     'Authorization': `Bearer ${userInfo.token}`
                 },
