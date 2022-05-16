@@ -21,7 +21,7 @@ function CartPage() {
 
     async function getData() {
         try {
-            const { data } = await axios.get('http://localhost:5000/user/cart', config);
+            const { data } = await axios.get(process.env.REACT_APP_HEROKU_URL + '/user/cart', config);
             setCart(data.cart);
             setTotal(data.total.replace('.', ','));
         } catch(err) {
